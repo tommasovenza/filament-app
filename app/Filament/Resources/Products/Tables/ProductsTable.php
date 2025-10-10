@@ -16,8 +16,11 @@ class ProductsTable
         return $table
             ->columns([
                 //
-                TextColumn::make('name'),
-                TextColumn::make('price')
+                TextColumn::make('name')->searchable(['name', 'price']),
+                TextColumn::make('price')->sortable()->money('EUR'),
+                TextColumn::make('status'),
+                // relationship name - field name
+                TextColumn::make('category.name'),
             ])
             ->filters([
                 //
