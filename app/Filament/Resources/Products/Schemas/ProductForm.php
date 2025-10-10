@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\Products\Schemas;
 
+use App\Filament\Tables\CategoriesTable;
 use App\ProductStatusEnum;
+use Filament\Forms\Components\ModalTableSelect;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
@@ -39,13 +41,18 @@ class ProductForm
 
                 // Select using relationships between models
 
-                Select::make('category_id')
-                    ->relationship('category', 'name'),
+                // Select::make('category_id')
+                //     ->relationship('category', 'name'),
 
                 // Alternative Syntax
                 // Select::make('category_id')
                 //     ->relationship('category')
                 //     ->getOptionLabelFromRecordUsing(fn(Model $record) => $record->name)
+
+                // Using Modal Table Select
+                ModalTableSelect::make('category_id')
+                    ->relationship('category', 'name')
+                    ->tableConfiguration(CategoriesTable::class)
             ]);
     }
 }
